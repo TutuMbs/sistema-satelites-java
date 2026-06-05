@@ -1,23 +1,40 @@
-# Sistema Simples de Satelites
+# Sistema de Satelites Java
 
-Projeto Java em console criado para a GS. A ideia e simples: cadastrar satelites, registrar missoes, salvar leituras de sensores e gerar alertas quando algum valor estiver ruim.
+Sistema em Java para gerenciamento de satelites, missoes, leituras de sensores e alertas orbitais. O projeto roda pelo console e foi organizado em camadas para demonstrar conceitos de programacao orientada a objetos.
 
-## Estrutura
+## Funcionalidades
+
+- Cadastro de satelites de comunicacao.
+- Cadastro de satelites de observacao.
+- Listagem e busca de satelites.
+- Cadastro e listagem de missoes.
+- Registro de leituras de sensores.
+- Geracao automatica de alertas para leituras em risco.
+- Validacao de entradas no menu do console.
+
+## Tecnologias
+
+- Java
+- Programacao orientada a objetos
+- Repositorios em memoria com `ArrayList`
+- Diagrama de classes em PlantUML
+
+## Estrutura do projeto
 
 ```text
 sistema-satelites-java/
-  src/
-    presentation/     Menu e interacao com o usuario
-    application/      Regras de aplicacao e integracao entre camadas
-    domain/           Entidades do sistema
-    infrastructure/   Repositorios em memoria usando ArrayList
   docs/
     diagrama-classes-domain.puml
+  src/
+    application/      Regras de aplicacao
+    domain/           Entidades e regras de dominio
+    infrastructure/   Repositorios em memoria
+    presentation/     Menu e interacao com o usuario
 ```
 
-## Como compilar e executar
+## Como executar
 
-No PowerShell, dentro da pasta `sistema-satelites-java`:
+Tenha o JDK instalado e execute os comandos abaixo no PowerShell, dentro da pasta do projeto:
 
 ```powershell
 $files = Get-ChildItem -Recurse src -Filter *.java | ForEach-Object { $_.FullName }
@@ -25,16 +42,35 @@ javac -d out $files
 java -cp out presentation.Main
 ```
 
-## Requisitos atendidos
+## Menu principal
 
-- Pacotes: `presentation`, `application`, `domain`, `infrastructure`.
-- Entidades com identificador unico, getters, setters, construtor padrao e construtor nao padrao.
-- Heranca: `EntidadeBase` e a classe `Satelite` sao reutilizadas pelas outras classes.
-- Override: `calcularPrioridadeOperacional()` e `exibirResumo()` em `SateliteComunicacao` e `SateliteObservacao`.
-- Overload: exemplos em `mostrarSituacao`, `cadastrarMissao`, `buscarSatelite` e `registrarLeitura`.
-- Armazenamento em memoria: todos os repositorios usam `ArrayList`.
-- Usabilidade: menu de navegacao, validacao de texto vazio, numeros invalidos e satelite inexistente.
+O sistema permite:
 
-## Sugestao para o pitch
+- Cadastrar satelite de comunicacao.
+- Cadastrar satelite de observacao.
+- Listar satelites.
+- Registrar leitura de sensor.
+- Gerar alerta orbital.
+- Cadastrar missao.
+- Listar missoes, leituras e alertas.
+- Buscar satelite por nome.
 
-O sistema simula uma pequena central escolar de monitoramento de satelites. O usuario cadastra um satelite, cria uma missao, registra uma leitura como temperatura, bateria ou sinal, e o programa avisa quando algo esta em risco.
+## Conceitos aplicados
+
+- Separacao em pacotes: `presentation`, `application`, `domain` e `infrastructure`.
+- Encapsulamento com atributos privados, getters e setters.
+- Construtor padrao e construtores com parametros.
+- Heranca usando `EntidadeBase` e `Satelite`.
+- Sobrescrita de metodos em `SateliteComunicacao` e `SateliteObservacao`.
+- Sobrecarga de metodos em servicos e entidades.
+- Persistencia em memoria com listas.
+
+## Diagrama
+
+O diagrama de classes do dominio esta em:
+
+```text
+docs/diagrama-classes-domain.puml
+```
+
+Ele pode ser aberto em extensoes PlantUML ou renderizado em ferramentas compativeis.
